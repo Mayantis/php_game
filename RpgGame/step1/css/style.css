@@ -1,0 +1,35 @@
+body{
+    width : 100%;
+    background-image: url('../img/Destiny_2_Beyond_Light.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.cell {
+    padding: 0;
+    font-size: 1.4rem;
+    height:32px;
+    width : 32px;
+    cursor: pointer;
+    background-color: rgba(230, 230, 250,0.4);
+}
+
+.cell:hover{
+    background-color: violet !important;
+}
+
+.selected {
+    background-color: whitesmoke;
+}
+
+.moves {
+    background-color: chartreuse  !important;
+}
+
+.player {
+    background-color: blue;
+}
+
+.monster {
+    background-color: red;
+}
+

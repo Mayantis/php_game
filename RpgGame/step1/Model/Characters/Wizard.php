@@ -5,6 +5,7 @@ namespace Model\Characters;
 final class Wizard extends Character
 {
     //** Constantes **\\
+    protected const SYMBOL = '&#129497;';
 
     public const FIREBALL_DAMAGE = 60;
     public const FIREBALL_COST = 80;
@@ -12,7 +13,7 @@ final class Wizard extends Character
     public const HEALHIMSELF_COST = 50;
 
 
-    //** Propriétés/Attributs **\\
+    //** Propriétés|Attributs **\\
 
     private $magic;
 
@@ -29,14 +30,33 @@ final class Wizard extends Character
     }
 
 
-    //** Comportement/fonctions **\\
-    
+    //** Comportement|fonctions **\\
+    public function getMoves(): array
+    {
+        $aIsMovable = [];
+        $iX = $this->x;
+        $iY = $this->y;
+
+        $aIsMovable = [
+                [$iX - 2, $iY - 1],
+                [$iX + 2, $iY + 1],
+                [$iX + 2, $iY - 1],
+                [$iX - 2, $iY + 1],
+                [$iX - 1, $iY - 2],
+                [$iX + 1, $iY + 2],
+                [$iX - 1, $iY + 2],
+                [$iX + 1, $iY - 2]
+            ];
+
+        return $aIsMovable;
+    }
+
     public function display()
     {
         print_r($this);
     }
 
-    //** Getter/Setter **\\
+    //** Getter|Setter **\\
 
     /**
      * Get the value of magic
@@ -82,25 +102,24 @@ final class Wizard extends Character
             echo $oPlayerB . ' est mort !';
         }
     }
-
-    //-> Créer une fonction "heal" pour simuler le lancement d'un sort (le sort en question restaure 50 points de vie et consomme 50 de mana)(le sort "heal" est personnel et ne peut pas être lancé)    
+  
     /**
      * healHimself
-     *
+     * simule le lancement d'un sort qui :
+     * ->restaure 50 points de vie
+     * ->consomme 50 points de mana 
+     * le sort "heal" est personnel 
+     * (ne peut pas être lancé sur un autre joueur)
      * @return void
      */
     public function healHimself(): void
     {
-        //$magicA = $oPlayerA -> getMagic();
-        //$healthA = $oPlayerA -> getHealth();
-        //$oPlayerA -> setMagic($magicA - $cost);
-        //$oPlayerA -> setHealth($healthA + $heal);
         if ($this->getMagic() <= Wizard::HEALHIMSELF_COST) {
             echo $this . ' a essayé de se soigner mais il n\'a plus assez de mana pour utiliser ce sort ! ' . PHP_EOL;
             return;
         }
         echo $this . ' se soigne ! ' . PHP_EOL;
-        $this->setHealth(($this->getHealth()) + Wizard::HEALHIMSELF_HEAL);
-        $this->setMagic($this->getMagic() - Wizard::HEALHIMSELF_COST);
+        $this->setHealth(($this->getHealth()) + Wizard::HEALHIMSELF_HEAL); 
+        $this->setMagic($this->getMagic() - Wizard::HEALHIMSELF_COST);      
     }
 }

@@ -1,11 +1,6 @@
 <?php
 
 namespace Model;
-
-/**
-
- */
-
 abstract class AbstractGame
 {
     //** Constantes **\\
@@ -98,12 +93,12 @@ abstract class AbstractGame
      *
      * @param  mixed $x
      * @param  mixed $y
-     * @param  mixed $player
+     * @param  mixed $objet
      * @return void
      */
-    protected function setCell(int $x, int $y, Pawn $pawn)
+    protected function setCell(int $x, int $y, $objet)
     {
-        $this->aBoard[$y][$x] = $pawn;
+        $this->aBoard[$y][$x] = $objet;
     }
 
     protected abstract function selectCell(\Entity\Player $oPlayer, int $x, int $y): array;
@@ -158,12 +153,12 @@ abstract class AbstractGame
     /**
      * addPlayers
      *
-     * @param  \Entity\Player $player
+     * @param  \Entity\Player $oPlayer
      * @return void
      */
-    public function addPlayers(\Entity\Player $player): void
+    public function addPlayer(\Entity\Player $oPlayer): void
     {
-        $this->players[] = $player;
+        $this->players[] = $oPlayer;
     }
 
 }

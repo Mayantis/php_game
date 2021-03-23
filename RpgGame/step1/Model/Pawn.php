@@ -7,7 +7,7 @@ class Pawn
 {
     use Positionable;
 
-    /** @var string  */
+    /** @const string  */
     protected const SYMBOL = '';
 
     /** @var string  */
