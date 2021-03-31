@@ -5,9 +5,21 @@
     define( 'SIZE_X', 10 );
     define( 'SIZE_Y', 10 );
 
-    define('WARRIOR', 'type1');
-    define('WIZARD', 'type2');
-    
+    define('WARRIOR', array(
+        'classe' => 'Warrior',
+        'health'   => 100,
+        'strength' => 50
+        )
+    );
+
+    define('WIZARD', array(
+        'classe' => 'Wizard',
+        'health'   => 120,
+        'strength' => 20,
+        'magic'    => 250
+        )
+    );
+
     include_once './functions.php';
 
     echo '== Début du programme ==' . PHP_EOL . PHP_EOL; //Constante saut de ligne = \n
@@ -24,32 +36,38 @@
     // 2.Initialisation des personnages
     $aWarior = array(
         'name'     => 'Aragorn',
-        'health'   => 100,
-        'strength' => 50,
         'type'     => WARRIOR,
+        'position' => array(
+            'x' => 4,
+            'y' => 1
+        )
     );
 
     $aWizard = array(
         'name'     => 'Gandalf',
-        'health'   => 120,
-        'strength' => 20,
-        'magic'    => 250,
         'type'     => WIZARD,
+        'position' => array(
+            'x' => 3,
+            'y' => 2
+        )
     );
 
     $aWizard2 = array(
         'name'     => 'Saruman',
-        'health'   => 80,
-        'strength' => 30,
-        'magic'    => 200,
         'type'     => WIZARD,
+        'position' => array(
+            'x' => 8,
+            'y' => 5
+        )
     );
 
     $aWarior2 = array(
         'name'     => 'Legolas',
-        'health'   => 300,
-        'strength' => 40,
         'type'     => WARRIOR,
+        'position' => array(
+            'x' => 5,
+            'y' => 7
+        )
     );
 
     $aCharacters =  array( $aWarior, $aWizard, $aWizard2, $aWarior2,);
@@ -59,20 +77,22 @@
     echo PHP_EOL;
 
     //3.Positionnemer (aleatoirement) les Personnages
+    
     foreach ( $aCharacters as $aCharacter ) {
-        $x = rand( 0, ( SIZE_X - 1 ) );
-        $y = rand( 0, ( SIZE_Y - 1 ) );
-        if( $aBoard[ $y ][ $x ] !== $aCharacter ) {
-            $aBoard[ $y ][ $x ] = $aCharacter;
-            echo '[' . $x . '/' . $y . '] : ' . $aCharacter[ 'name' ] . PHP_EOL;
-        }
-        else {
-            $aBoard[ rand(0, ( SIZE_Y - 1 ) ) ][ rand(0, ( SIZE_X - 1 ) ) ] = $aCharacter;
-            echo '[' . $x . '/' . $y . ']' . $aCharacter['name'] . PHP_EOL;
-        }
+    
+        /*$x = rand( 0, ( SIZE_X - 1 ) );
+        $y = rand( 0, ( SIZE_Y - 1 ) );*/
+        $x = $aCharacter['position']['x'];
+        $y = $aCharacter['position']['y'];
+        $aBoard[$y][$x] = $aCharacter;
+        /*echo '[' . $x . '/' . $y . '] : ' . $aCharacter[ 'name' ] . PHP_EOL;*/
     }
+        
+    
     echo PHP_EOL . PHP_EOL;
+    
 
+    
     //4.Affichage du tableau board en forme de grille
     displayBoard($aBoard);
     echo PHP_EOL;
@@ -81,3 +101,4 @@
     echo PHP_EOL . PHP_EOL;     //print_r($aBoard);
     
     echo '== Fin du programme ==' . PHP_EOL;
+?>
