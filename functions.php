@@ -18,7 +18,7 @@
         }
     }
     
-
+ 
 /**
 * displayBoard
 * @param  array $board
